@@ -44,6 +44,7 @@ gulp.task('js:dist', function () {
     .pipe(gulp.dest(paths.dist));
 });
 gulp.task('copy:dist', ['html:dist', 'css:dist', 'js:dist']);
+
 gulp.task('inject:dist', ['copy:dist'], function () {
   var css = gulp.src(paths.distCSS);
   var js = gulp.src(paths.distJS);
@@ -53,7 +54,19 @@ gulp.task('inject:dist', ['copy:dist'], function () {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('build', ['inject:dist']);
+gulp.task('serve', ['inject:dist'], function () {
+    return gulp.src(paths.dist)
+      .pipe(webserver({
+        port: 3000,
+  			livereload: true
+      }));
+  });
+
+gulp.task('watch', ['serve'], function () {
+	gulp.watch(paths.src, ['inject:dist']);
+});
+
+gulp.task('build', ['watch']);
 
 
 // /**
