@@ -6,6 +6,7 @@ var htmlclean = require('gulp-htmlclean');
 var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var babel = require('gulp-babel');
 
 var paths = {
 	src: 'src/**/*',
@@ -37,8 +38,18 @@ gulp.task('css:dist', function () {
     .pipe(cleanCSS())
     .pipe(gulp.dest(paths.dist));
 });
+// gulp.task('js:dist', function () {
+//   return gulp.src(paths.srcJS)
+//     .pipe(concat('script.min.js'))
+//     .pipe(uglify())
+//     .pipe(gulp.dest(paths.dist));
+// });
+
 gulp.task('js:dist', function () {
   return gulp.src(paths.srcJS)
+    .pipe(babel({
+      presets: ['es2015']
+     }))
     .pipe(concat('script.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.dist));
@@ -66,7 +77,7 @@ gulp.task('watch', ['serve'], function () {
 	gulp.watch(paths.src, ['inject:dist']);
 });
 
-gulp.task('build', ['watch']);
+gulp.task('default', ['watch']);
 
 
 // /**

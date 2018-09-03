@@ -11,15 +11,18 @@
 	<body>
 		<div class="wrapper">
 			<header class="header grid-item">Header</header>
-			<section class="section grid-item">Section</section>
-			<aside class="aside grid-item">Aside</aside>
+			<section class="section grid-item" onclick="main.section()">Section</section>
+			<aside class="aside grid-item" onclick="main.aside()">Aside</aside>
 			<footer class="footer grid-item">Footer</footer>
 		</div>
 		<!--[htmlclean-protect]-->
     <!-- inject:js -->
-    <!-- endinject -->
+		<script src="/src/components/aside.js" type="script"></script>
+		<script src="/src/components/section.js" type="script"></script>
+		<script src="main.js" type="script"></script>
+		<!-- endinject -->
     <!--[/htmlclean-protect]-->
-		<script src="main.js"></script>
+		
 		<!-- Go ahead and run the ‘build’ task. -->
 	</body>
 </html>
